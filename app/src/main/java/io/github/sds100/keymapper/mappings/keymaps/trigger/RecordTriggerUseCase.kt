@@ -24,7 +24,7 @@ class RecordTriggerController(
                     TriggerKeyDevice.Internal
                 }
 
-                RecordedKey(event.keyCode, device)
+                RecordedKey(event.keyCode, event.scanCode ,device)
             }
 
             else -> null

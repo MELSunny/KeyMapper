@@ -16,8 +16,8 @@ data class TriggerKey(
     val keyCode: Int,
     val device: TriggerKeyDevice,
     val clickType: ClickType,
-
     val consumeKeyEvent: Boolean = true,
+    val scanCode: Int=0
 ) {
 
     override fun toString(): String {
@@ -51,7 +51,8 @@ object KeymapTriggerKeyEntityMapper {
                 TriggerEntity.DOUBLE_PRESS -> ClickType.DOUBLE_PRESS
                 else -> ClickType.SHORT_PRESS
             },
-            consumeKeyEvent = !entity.flags.hasFlag(TriggerEntity.KeyEntity.FLAG_DO_NOT_CONSUME_KEY_EVENT)
+            consumeKeyEvent = !entity.flags.hasFlag(TriggerEntity.KeyEntity.FLAG_DO_NOT_CONSUME_KEY_EVENT),
+            scanCode = entity.scanCode
         )
     }
 
@@ -86,7 +87,8 @@ object KeymapTriggerKeyEntityMapper {
             deviceName = deviceName,
             clickType = clickType,
             flags = flags,
-            uid = key.uid
+            uid = key.uid,
+            scanCode=key.scanCode
         )
     }
 }

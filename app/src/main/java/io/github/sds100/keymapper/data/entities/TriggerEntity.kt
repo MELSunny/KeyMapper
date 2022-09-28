@@ -93,7 +93,9 @@ data class TriggerEntity(
         val flags: Int = 0,
 
         @SerializedName(NAME_UID)
-        val uid: String = UUID.randomUUID().toString()
+        val uid: String = UUID.randomUUID().toString(),
+        @SerializedName(NAME_SCANCODE)
+        val scanCode: Int
     ) : Parcelable {
 
         companion object {
@@ -104,6 +106,7 @@ data class TriggerEntity(
             const val NAME_CLICK_TYPE = "clickType"
             const val NAME_FLAGS = "flags"
             const val NAME_UID = "uid"
+            const val NAME_SCANCODE = "scanCode"
 
             //IDS! DON'T CHANGE
             const val DEVICE_ID_THIS_DEVICE = "io.github.sds100.keymapper.THIS_DEVICE"
@@ -120,8 +123,8 @@ data class TriggerEntity(
                 //nullable because this property was added after backup and restore was released.
                 val flags by it.json.byNullableInt(NAME_FLAGS)
                 val uid by it.json.byNullableString(NAME_UID)
-
-                KeyEntity(keycode, deviceId, deviceName, clickType,flags ?: 0, uid ?: UUID.randomUUID().toString())
+                val scanCode by it.json.byInt(NAME_SCANCODE)
+                KeyEntity(keycode, deviceId, deviceName, clickType,flags ?: 0, uid ?: UUID.randomUUID().toString(),scanCode)
             }
         }
     }

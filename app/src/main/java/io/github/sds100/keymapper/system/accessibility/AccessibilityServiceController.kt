@@ -299,6 +299,7 @@ class AccessibilityServiceController(
                     outputEvents.emit(
                         Event.RecordedTriggerKey(
                             keyCode,
+                            scanCode,
                             device
                         )
                     )

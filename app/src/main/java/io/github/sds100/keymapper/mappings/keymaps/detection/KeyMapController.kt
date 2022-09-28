@@ -562,12 +562,13 @@ class KeyMapController(
 
         val event =
             if (device != null && device.isExternal) {
-                Event(keyCode, null, device.descriptor)
+                Event(keyCode, null, device.descriptor, scanCode)
             } else {
                 Event(
                     keyCode,
                     null,
-                    null
+                    null,
+                    scanCode
                 )
             }
 
@@ -1462,6 +1463,7 @@ class KeyMapController(
                     && event.descriptor != null
                     && event.descriptor == this.device.descriptor
                     && this.clickType == event.clickType
+                    && this.scanCode == event.scanCode
 
             TriggerKeyDevice.Internal ->
                 this.keyCode == event.keyCode
@@ -1550,7 +1552,8 @@ class KeyMapController(
         /**
          * null if not an external device
          */
-        val descriptor: String?
+        val descriptor: String?,
+        val scanCode: Int
     )
 
     private data class TriggerKeyLocation(val triggerIndex: Int, val keyIndex: Int)

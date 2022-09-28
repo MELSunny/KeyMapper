@@ -34,6 +34,7 @@ sealed class Event {
     @Serializable
     data class RecordedTriggerKey(
         val keyCode: Int,
+        val scanCode: Int,
         val device: InputDeviceInfo?
     ) : Event(), Parcelable
 
